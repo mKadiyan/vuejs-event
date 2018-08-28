@@ -11,19 +11,26 @@
 
 <body>
     <div id="app">
-        <button v-on:click='increaseCounter'>Click Me</button>
+        <button v-on:click='increaseCounter(2, $event)'>Click Me</button>
         <p>{{ counter }}</p>
+        <p v-on:mousemove="updateCoordinate">Coordinates: {{ x }}, {{ y }}</p>
     </div>
 </body>
 <script>
     new Vue({
         el: '#app',
         data: {
-            counter: 0
+            counter: 0,
+            x: 0,
+            y: 0
         },
         methods: {
-            increaseCounter: function () {
-                this.counter += 1;
+            increaseCounter: function (step, event) {
+                this.counter += step;
+            },
+            updateCoordinate: function(event){
+                this.x = event.clientX;
+                this.y = event.clientY;
             }
         }
 
